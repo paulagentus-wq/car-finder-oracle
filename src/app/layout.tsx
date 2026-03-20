@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Navbar from '@/components/navbar'
 
 export const metadata: Metadata = {
   title: 'Car Finder Oracle — AI-Powered Car Intelligence',
@@ -28,7 +29,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-zinc-950 text-white antialiased">
+      <body className="min-h-screen bg-[#0a0a0f] text-white antialiased" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <Navbar />
         {children}
       </body>
     </html>

@@ -3,97 +3,102 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const DEMO_PLATES = [
-  { id: 1, reg: "B1G BOSS", price: 12500, category: "Premium" },
-  { id: 2, reg: "M 340I", price: 8900, category: "Car Model" },
-  { id: 3, reg: "SP33D", price: 4500, category: "Performance" },
-  { id: 4, reg: "DR1FT", price: 3200, category: "Performance" },
-  { id: 5, reg: "GO FAST", price: 7800, category: "Performance" },
-  { id: 6, reg: "1 CFO", price: 15000, category: "Premium" },
-  { id: 7, reg: "RS3 AUD", price: 6200, category: "Car Model" },
-  { id: 8, reg: "V8 POWR", price: 5400, category: "Performance" },
-  { id: 9, reg: "MY 911", price: 9800, category: "Car Model" },
-  { id: 10, reg: "R4CER", price: 2800, category: "Performance" },
-  { id: 11, reg: "K1NG", price: 11000, category: "Premium" },
-  { id: 12, reg: "SUP3R", price: 3600, category: "Performance" },
+const PLATES = [
+  { id: 1, reg: "B3N 007", price: 4995, style: "rear" as const },
+  { id: 2, reg: "M4 CFO", price: 8500, style: "front" as const },
+  { id: 3, reg: "RS3 AAA", price: 3200, style: "rear" as const },
+  { id: 4, reg: "P911 RR", price: 12750, style: "front" as const },
+  { id: 5, reg: "P4UL X", price: 6400, style: "rear" as const },
+  { id: 6, reg: "D4VE Y", price: 2495, style: "front" as const },
+  { id: 7, reg: "J4MES", price: 3800, style: "rear" as const },
+  { id: 8, reg: "CL4SS", price: 5200, style: "front" as const },
 ];
+
+function PlateDisplay({ reg, style }: { reg: string; style: "front" | "rear" }) {
+  const bgColor = style === "rear" ? "bg-amber-400" : "bg-white";
+  return (
+    <div
+      className={`mx-auto w-72 rounded-lg border-2 border-zinc-700 ${bgColor} py-4 px-6 text-center`}
+    >
+      <span className="font-mono text-4xl font-black tracking-wider text-zinc-900">
+        {reg}
+      </span>
+    </div>
+  );
+}
 
 export default function PlatesPage() {
   const [search, setSearch] = useState("");
 
-  const filtered = DEMO_PLATES.filter((p) =>
+  const filtered = PLATES.filter((p) =>
     p.reg.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen bg-[#09090b] relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="space-y-8">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-white">Private Plates</h1>
+        <p className="text-zinc-400 mt-1">
+          Browse, value, and buy private number plates.
+        </p>
+      </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-12">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <Link href="/" className="text-amber-500 text-sm hover:text-amber-400 transition">
-              &larr; Back to Home
-            </Link>
-            <h1 className="text-3xl font-bold text-white mt-3">
-              🔢 Plates Marketplace
-            </h1>
-            <p className="text-zinc-400 mt-1">
-              Find your perfect personalised number plate.
-            </p>
-          </div>
-          <Link
-            href="/plates/list"
-            className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-xl transition text-sm"
+      {/* Search */}
+      <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-2">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search plates..."
+          className="w-full px-4 py-3 bg-transparent text-white placeholder-zinc-500 focus:outline-none text-lg"
+        />
+      </div>
+
+      {/* Plate Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {filtered.map((plate) => (
+          <div
+            key={plate.id}
+            className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-amber-500/30 hover:bg-white/[0.08] transition group text-center"
           >
-            + List a Plate
-          </Link>
-        </div>
+            <PlateDisplay reg={plate.reg} style={plate.style} />
 
-        {/* Search */}
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-2 mb-8">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search plates..."
-            className="w-full px-4 py-3 bg-transparent text-white placeholder-zinc-500 focus:outline-none text-lg"
-          />
-        </div>
+            <p className="text-xs text-zinc-500 mt-4 mb-1">
+              {plate.style === "rear" ? "Rear Plate" : "Front Plate"}
+            </p>
+            <p className="text-2xl font-bold text-white mb-4">
+              £{plate.price.toLocaleString()}
+            </p>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filtered.map((plate) => (
-            <div
-              key={plate.id}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-amber-500/30 transition group text-center"
-            >
-              {/* Plate Display */}
-              <div className="bg-amber-500 rounded-lg py-3 px-4 mb-4 inline-block">
-                <span className="text-black font-bold text-xl tracking-wider font-mono">
-                  {plate.reg}
-                </span>
-              </div>
-
-              <p className="text-xs text-zinc-500 mb-2">{plate.category}</p>
-              <p className="text-xl font-bold text-white mb-4">
-                &pound;{plate.price.toLocaleString()}
-              </p>
-
-              <button className="w-full py-2.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 text-sm font-medium rounded-xl hover:bg-amber-500/20 transition">
-                Enquire
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="text-center py-20">
-            <span className="text-4xl block mb-3">🔍</span>
-            <p className="text-zinc-400">No plates match your search.</p>
+            <button className="w-full py-2.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 text-sm font-medium rounded-xl hover:bg-amber-500/20 transition">
+              Enquire
+            </button>
           </div>
-        )}
+        ))}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="text-center py-20">
+          <span className="text-4xl block mb-3">🔍</span>
+          <p className="text-zinc-400">No plates match your search.</p>
+        </div>
+      )}
+
+      {/* List Your Plate CTA */}
+      <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+        <h3 className="text-xl font-bold text-white mb-2">
+          Have a plate to sell?
+        </h3>
+        <p className="text-zinc-400 text-sm mb-5">
+          List your private plate on our marketplace and reach thousands of buyers.
+        </p>
+        <Link
+          href="/plates/list"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-xl transition text-sm"
+        >
+          List Your Plate →
+        </Link>
       </div>
     </div>
   );
