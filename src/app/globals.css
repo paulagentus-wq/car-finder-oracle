@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand Tokens ─────────────────────────────────────── */
+:root {
+  --brand: #f59e0b;
+  --brand-light: #fbbf24;
+  --brand-dark: #d97706;
+  --bg: #09090b;
+  --surface: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: #fafafa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(245, 158, 11, 0.3);
+  color: #fff;
+}
+
+/* ── Glass Morphism ───────────────────────────────────── */
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm;
+  }
+
+  .glass-hover {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm
+           transition-all duration-300 ease-out;
+  }
+
+  .glass-hover:hover {
+    @apply border-amber-500/20 bg-white/[0.06] shadow-lg shadow-amber-500/5;
+    transform: translateY(-2px);
+  }
+
+  /* ── Brand Button ─────────────────────────────────── */
+  .btn-brand {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl
+           bg-amber-500 px-6 py-3 text-sm font-semibold text-zinc-950
+           transition-all duration-200 ease-out;
+  }
+
+  .btn-brand:hover {
+    @apply bg-amber-400 shadow-lg shadow-amber-500/25;
+    transform: translateY(-1px);
+  }
+
+  .btn-brand:active {
+    @apply bg-amber-600;
+    transform: translateY(0);
+  }
+
+  /* ── Ghost Button ─────────────────────────────────── */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl
+           border border-white/10 bg-transparent px-6 py-3 text-sm
+           font-medium text-white/80 transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    @apply border-white/20 bg-white/[0.05] text-white;
+  }
+
+  /* ── Section Container ────────────────────────────── */
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ── Severity + Score Classes (carried from v5) ──── */
+  .glass-light {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .gauge-ring {
+    transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ── Scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.5);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 158, 11, 0.3) transparent;
+}
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
+  }
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-ticker {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ── Gradient Utilities ───────────────────────────────── */
+.gradient-brand {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.gradient-text-brand {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-radial-amber {
+  background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+}
+
+/* ── Noise Overlay (subtle texture) ───────────────────── */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}

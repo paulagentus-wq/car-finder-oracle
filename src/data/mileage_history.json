@@ -1,0 +1,20 @@
+[
+  {"id": 1, "carId": "m4", "date": "Mar 21", "mileage": 0},
+  {"id": 2, "carId": "m4", "date": "Mar 22", "mileage": 9200},
+  {"id": 3, "carId": "m4", "date": "Mar 23", "mileage": 18100},
+  {"id": 4, "carId": "m4", "date": "Mar 24", "mileage": 22800},
+  {"id": 5, "carId": "m4", "date": "Mar 25", "mileage": 28400},
+  {"id": 6, "carId": "m3", "date": "Jun 22", "mileage": 0},
+  {"id": 7, "carId": "m3", "date": "Feb 24", "mileage": 8500},
+  {"id": 8, "carId": "m3", "date": "Feb 25", "mileage": 19200},
+  {"id": 9, "carId": "rs3", "date": "Mar 22", "mileage": 0},
+  {"id": 10, "carId": "rs3", "date": "Jan 24", "mileage": 11400},
+  {"id": 11, "carId": "rs3", "date": "Jan 25", "mileage": 22100},
+  {"id": 12, "carId": "911", "date": "Mar 20", "mileage": 0},
+  {"id": 13, "carId": "911", "date": "Nov 22", "mileage": 10200},
+  {"id": 14, "carId": "911", "date": "Nov 23", "mileage": 21800},
+  {"id": 15, "carId": "911", "date": "Nov 24", "mileage": 31500},
+  {"id": 16, "carId": "rr", "date": "Sep 22", "mileage": 0},
+  {"id": 17, "carId": "rr", "date": "Apr 24", "mileage": 14200},
+  {"id": 18, "carId": "rr", "date": "Apr 25", "mileage": 26800}
+]
